@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Insira a quantidade de tomates que você armazena: <input type="number" id="ipt_QtdTomate" min="0"><br>
+    Preço do tomate : <input type="number" id="ipt_PrecoTomate" min="0"><br>
+    Os tomates estão maduros? 
+    <select name="select" id="sel_estadoTomate">
+        <option value=""></option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+    </select><br>
+    <button onclick="CalcularOrcamento()">Calcular Orçamento</button>
+    <div style="display: flex;">
+        <div id="ExibirMsg" style="margin: 10px;"></div>
+        <div id="ExibirMsgSolucao" style="margin: 10px ;"></div>
+    </div>
+</body>
+</html>
+<script>
+    function CalcularOrcamento()
+    {
+        // Entradas
+        var qtdTomates = Number(ipt_QtdTomate.value)
+        var precoTomate = Number(ipt_PrecoTomate.value)
+        var estadoTomate = sel_estadoTomate.value
+        // Calculo Sem nosso projeto
+        var precoTotal = qtdTomates * precoTomate
+        var perdaTomate = qtdTomates * .40
+        var perdaTransporte , perdaDinheiro = 0
+
+        if(estadoTomate == "Não")
+        {
+            perdaTransporte = perdaTomate
+            perdaDinheiro = precoTomate * perdaTransporte
+            ExibirMsg.innerHTML =
+            `
+            Sem Nosso Projeto:<br>
+            Preço do tomate : R$${precoTomate}<br>
+            Quantidade de tomates : ${qtdTomates}<br>
+            Preço Total de tomates : R${precoTotal}<br>
+            perda de tomates no transporte: ${perdaTransporte}<br>
+            Perda em dinheiro: R$${perdaDinheiro}<br>
+            `
+        }else if(estadoTomate == "Sim")
+        {
+            perdaTransporte = perdaTomate   
+            perdaDinheiro = precoTomate * perdaTransporte
+
+            ExibirMsg.innerHTML =
+            `
+            Sem Nosso Projeto:<br>
+            Preço do tomate : R$${precoTomate}<br>
+            Quantidade de tomates : ${qtdTomates}<br>
+            Preço Total de tomates : R${precoTotal}<br>
+            perda de tomates durante o transporte: ${perdaTransporte}<br>
+            Perda em dinheiro: R$${perdaDinheiro}<br>
+            `
+        }else
+        {
+            alert("Selecione uma opção valida.")
+        }
+
+        var efetividadeTomate = qtdTomates * .90
+        var efetividadeDinheiro = precoTomate * efetividadeTomate
+        var perdaComEfetividadeTomate = qtdTomates * 0.10        
+        var perdaComEfetividadeDinheiro = precoTomate * perdaComEfetividadeTomate
+
+        ExibirMsgSolucao.innerHTML = 
+        `
+        Com nosso projeto🤑<br>
+        Tomates Economizados = ${efetividadeTomate}<br>
+        Dinheiro Economizado = R$${efetividadeDinheiro}<br>
+        Perda de tomates durante o transporte = ${perdaComEfetividadeTomate}<br>
+        Dinheiro Perdido = R$${perdaComEfetividadeDinheiro}
+        
+        `
+        
+        // Calculo com nosso projeto
+
+    }
+</script>
